@@ -840,7 +840,7 @@
       });
       // Add wrap chip
       chipsHtml += `
-        <span class="stem-chip" style="background-color: #F8F4EE; border-color: #D4B38C;">
+        <span class="stem-chip stem-chip-wrap">
           🎁 ${WRAPPINGS[state.builder.wrapping].name}
         </span>
       `;

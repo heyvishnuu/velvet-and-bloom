@@ -562,6 +562,16 @@ html:not([data-theme="dark"]) .moon-icon {
 [data-theme="dark"] .wrap-visual-box {
   background: #1A1418;
 }
+[data-theme="dark"] .stem-chip {
+  background: #231B21;
+  border-color: rgba(245, 238, 237, 0.14);
+  color: #F5EEED;
+}
+[data-theme="dark"] .stem-chip-wrap {
+  background: #2D2319 !important;
+  border-color: rgba(224, 179, 110, 0.45) !important;
+  color: #FDE8C4 !important;
+}
 [data-theme="dark"] .physical-greeting-card {
   background: #251D23;
   border-color: rgba(224, 179, 110, 0.28);
@@ -1081,6 +1091,11 @@ html:not([data-theme="dark"]) .moon-icon {
   font-weight: 600;
   color: var(--color-charcoal);
   animation: chipPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stem-chip-wrap {
+  background: var(--color-gold-light);
+  border-color: rgba(194, 147, 77, 0.35);
+  color: var(--color-charcoal);
 }
 @keyframes chipPop {
   0% { transform: scale(0.8); opacity: 0; }
