@@ -588,6 +588,12 @@ html:not([data-theme="dark"]) .moon-icon {
 [data-theme="dark"] .card-sender-display {
   color: var(--color-gold);
 }
+[data-theme="dark"] .card-recipient-display {
+  color: #FFFFFF;
+}
+[data-theme="dark"] .card-message-display {
+  color: #FAF2EC;
+}
 [data-theme="dark"] .text-input:focus,
 [data-theme="dark"] .text-area:focus,
 [data-theme="dark"] .select-input:focus {
@@ -1547,7 +1553,7 @@ html:not([data-theme="dark"]) .moon-icon {
   font-family: var(--font-serif);
   font-size: 1.05rem;
   line-height: 1.5;
-  color: #383032;
+  color: var(--color-charcoal);
   font-style: italic;
   flex: 1;
   word-break: break-word;
