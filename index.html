@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velvet & Bloom — Bespoke Floral Atelier & Fresh Bouquet Builder</title>
+  <meta name="description" content="Custom handcrafted flower bouquets for birthdays, anniversaries, graduations, and get-well wishes. Build your fresh floral arrangement with live visualizer and same-day delivery.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Floating Blossom Petals Canvas -->
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- Celebration Confetti Canvas -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- Accessibility Skip Link -->
+  <a href="#bouquet-builder" class="skip-link">Skip to Bouquet Builder</a>
+
+  <!-- Announcement Bar -->
+  <aside class="announcement-bar" role="region" aria-label="Special Offers">
+    <span class="announcement-badge">Fresh Today</span>
+    <span>Complimentary Doorstep Delivery on Bouquets over $65 • Use code <span class="announcement-code">BLOOM10</span> for 10% off</span>
+  </aside>
+
+  <!-- Site Header & Sticky Navigation -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="#" class="brand-logo" aria-label="Velvet & Bloom Home">
+        <svg class="brand-logo-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <!-- Delicate curved stem in sage green -->
+          <path d="M20,22 Q20,31 18,36" stroke="#7B9070" stroke-width="2" stroke-linecap="round"/>
+          <!-- Sage leaves -->
+          <path d="M19,27 C13,26 10,30 15,33 C18,34 19,30 19,27 Z" fill="#7B9070"/>
+          <path d="M19,30 C25,29 28,32 24,35 C22,36 20,33 19,30 Z" fill="#7B9070" opacity="0.9"/>
+          <!-- Outer rose blush lateral petals -->
+          <path d="M12,18 C10,10 15,5 20,10 C20,16 16,19 12,18 Z" fill="#D07F70"/>
+          <path d="M28,18 C30,10 25,5 20,10 C20,16 24,19 28,18 Z" fill="#D07F70"/>
+          <!-- Central deep velvet burgundy bloom petal -->
+          <path d="M20,4 C25,8 26,16 20,22 C14,16 15,8 20,4 Z" fill="#591925"/>
+          <!-- Inner blush petal heart -->
+          <path d="M20,8 C23,12 23,17 20,19 C17,17 17,12 20,8 Z" fill="#F7E5E1"/>
+          <!-- Warm golden center stamen bead -->
+          <circle cx="20" cy="13.5" r="2" fill="#C2934D"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-title">Velvet & Bloom</span>
+          <span class="brand-subtitle">Bespoke Floral Atelier</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#hero" class="nav-link">Home</a></li>
+          <li><a href="#occasion-presets" class="nav-link">Occasions</a></li>
+          <li><a href="#bouquet-builder" class="nav-link">Bouquet Builder</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="#delivery-section" class="nav-link">Delivery</a></li>
+          <li><a href="#footer" class="nav-link">Our Atelier</a></li>
+        </ul>
+      </nav>
+
+      <!-- Cart Toggle & Mobile Menu Trigger -->
+      <div class="nav-actions">
+        <button type="button" class="cart-toggle-btn" id="cart-toggle-btn" aria-label="View Shopping Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span>Cart</span>
+          <span class="cart-count-badge">0</span>
+        </button>
+
+        <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17,8 C8,10 5,16 6,21 C11,21 17,17 19,10 C19,9 18,8 17,8 Z M8.5,18 C8.2,15.5 10.5,12 14,10.5 C12.5,14 10.5,16.5 8.5,18 Z"/>
+            </svg>
+            Hand-Crafted With Fresh Local Stems
+          </div>
+          <h1 class="hero-title">
+            Express Every Emotion in <em>Living Petals</em>
+          </h1>
+          <p class="hero-description">
+            Design bespoke fresh floral arrangements for life's unforgettable milestones. Handpick each bloom, select artisan wrapping, compose heartfelt stationery, and schedule seamless local delivery.
+          </p>
+          <div class="hero-actions">
+            <a href="#bouquet-builder" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+              Create Your Bouquet
+            </a>
+            <a href="#occasion-presets" class="btn btn-secondary">
+              Browse Occasion Presets
+            </a>
+          </div>
+          <div class="hero-highlights">
+            <div class="hero-stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Farm Fresh Stems</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="stat-number">Same-Day</span>
+              <span class="stat-label">Hand-Delivered</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="stat-number">7+ Days</span>
+              <span class="stat-label">Vase Longevity</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-showcase">
+          <div class="showcase-glow" aria-hidden="true"></div>
+          <div class="showcase-card">
+            <div class="showcase-visual">
+              <!-- Animated Hero Illustration -->
+              <svg viewBox="0 0 320 320" width="100%" height="100%">
+                <!-- Leaves -->
+                <path d="M 80,180 C 40,140 60,90 100,100 C 100,140 100,160 80,180 Z" fill="#6B7F5E" opacity="0.8" />
+                <path d="M 240,180 C 280,140 260,90 220,100 C 220,140 220,160 240,180 Z" fill="#6B7F5E" opacity="0.8" />
+                <!-- Roses -->
+                <circle cx="160" cy="110" r="32" fill="#B31B32" />
+                <circle cx="160" cy="110" r="22" fill="#DE314D" />
+                <circle cx="160" cy="110" r="10" fill="#690919" />
+                <!-- Lilies -->
+                <circle cx="115" cy="140" r="26" fill="#FAF9F6" stroke="#DED6C7" stroke-width="1.5" />
+                <circle cx="115" cy="140" r="6" fill="#C2934D" />
+                <!-- Orchids -->
+                <circle cx="205" cy="140" r="26" fill="#8E388A" />
+                <circle cx="205" cy="140" r="10" fill="#FDE875" />
+                <!-- Sunflowers -->
+                <circle cx="160" cy="175" r="34" fill="#F5B01D" />
+                <circle cx="160" cy="175" r="16" fill="#4A2A14" />
+                <!-- Kraft wrap -->
+                <polygon points="100,190 220,190 185,300 135,300" fill="#D4B38C" stroke="#9E7648" stroke-width="1.5" />
+                <line x1="120" y1="225" x2="200" y2="225" stroke="#7A562D" stroke-width="4" stroke-linecap="round" />
+                <circle cx="160" cy="225" r="6" fill="#7A562D" />
+              </svg>
+            </div>
+            <div class="showcase-badge-floating">
+              🌿 Artisanal Signature Arrangement
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Occasion Presets Ribbon -->
+    <section class="presets-section" id="occasion-presets">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Instant Inspirations</span>
+          <h2 class="section-title">Curated For Every Milestone</h2>
+          <p class="section-subtitle">
+            Need a thoughtful starting point? Choose a pre-styled bouquet recipe crafted by our master floral artisans and customize to your heart's desire.
+          </p>
+        </div>
+
+        <div class="presets-grid" id="presets-grid">
+          <!-- Birthday -->
+          <div class="preset-card active" data-preset="birthday" role="button" tabindex="0">
+            <div class="preset-icon">🎂</div>
+            <h3 class="preset-name">Birthday Sunshine</h3>
+            <p class="preset-desc">Golden sunflowers, blush carnations & lilies in organic kraft wrap.</p>
+            <span class="preset-meta">10 Stems • From $42.50</span>
+          </div>
+
+          <!-- Anniversary -->
+          <div class="preset-card" data-preset="anniversary" role="button" tabindex="0">
+            <div class="preset-icon">💍</div>
+            <h3 class="preset-name">Romantic Anniversary</h3>
+            <p class="preset-desc">12 velvety red roses & royal orchids in luxury matte black wrap.</p>
+            <span class="preset-meta">15 Stems • From $79.00</span>
+          </div>
+
+          <!-- Congratulations -->
+          <div class="preset-card" data-preset="congratulations" role="button" tabindex="0">
+            <div class="preset-icon">🥂</div>
+            <h3 class="preset-name">Congratulations</h3>
+            <p class="preset-desc">Exotic orchids, carnations & lilies displayed in a handwoven basket.</p>
+            <span class="preset-meta">14 Stems • From $73.50</span>
+          </div>
+
+          <!-- Get Well Soon -->
+          <div class="preset-card" data-preset="getwell" role="button" tabindex="0">
+            <div class="preset-icon">🕊️</div>
+            <h3 class="preset-name">Gentle Recovery</h3>
+            <p class="preset-desc">Fragrant white lilies, carnations & sunflowers in a clear crystal vase.</p>
+            <span class="preset-meta">12 Stems • From $59.00</span>
+          </div>
+
+          <!-- Graduation -->
+          <div class="preset-card" data-preset="graduation" role="button" tabindex="0">
+            <div class="preset-icon">🎓</div>
+            <h3 class="preset-name">Graduation Triumph</h3>
+            <p class="preset-desc">Radiant sunflowers, red roses & lilies styled in a florist glass cylinder.</p>
+            <span class="preset-meta">14 Stems • From $72.50</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Bouquet Builder Section -->
+    <section class="builder-section" id="bouquet-builder">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Interactive Studio</span>
+          <h2 class="section-title">Design Your Custom Bouquet</h2>
+          <p class="section-subtitle">
+            Every petal tells a story. Select your flower varieties, fine-tune quantities, choose artisan wrapping, and write your personal note.
+          </p>
+        </div>
+
+        <div class="builder-layout">
+          <!-- Left Column: Sticky Live Visualizer -->
+          <aside class="builder-preview-col" aria-label="Live Bouquet Preview">
+            <div class="preview-card">
+              <div class="preview-header">
+                <span class="preview-badge-status">Live Dynamic Preview</span>
+                <button type="button" class="preview-reset-btn" id="reset-builder-btn">Reset All Stems</button>
+              </div>
+
+              <!-- SVG Visual Stage -->
+              <div class="bouquet-canvas-stage">
+                <svg id="live-bouquet-svg" viewBox="0 0 400 420" role="img" aria-label="Visual representation of customized flower bouquet">
+                  <!-- Generated dynamically in app.js -->
+                </svg>
+                <div class="bouquet-empty-notice" id="bouquet-empty-notice" style="display:none;">
+                  <span style="font-size:2.2rem;">🥀</span>
+                  <p>Your bouquet is waiting for its first bloom!</p>
+                  <small style="font-size:0.75rem; color:#888;">Select flowers below to begin.</small>
+                </div>
+              </div>
+
+              <!-- Bouquet Fullness Meter -->
+              <div class="fullness-wrapper">
+                <div class="fullness-labels">
+                  <span>Arrangement Density: <strong id="fullness-tier" class="fullness-tier-name">Classic Bouquet</strong></span>
+                  <span><strong id="total-stems-count">12</strong> Stems</span>
+                </div>
+                <div class="fullness-bar-bg" role="progressbar" aria-valuemin="0" aria-valuemax="25" aria-valuenow="12" aria-label="Bouquet fullness">
+                  <div class="fullness-bar-fill" id="fullness-fill" style="width: 55%;"></div>
+                </div>
+              </div>
+
+              <!-- Selected Stems Summary Chips -->
+              <div class="selected-stems-summary" id="stems-summary-chips">
+                <!-- Injected dynamically in app.js -->
+              </div>
+
+              <!-- Live Total Price -->
+              <div class="live-total-box">
+                <div>
+                  <div class="live-total-label">Bouquet Subtotal</div>
+                  <div style="font-size:0.75rem; color:var(--color-sage-dark);">Includes wrapping & note card</div>
+                </div>
+                <div class="live-total-amount" id="builder-price-display">$46.50</div>
+              </div>
+
+              <button type="button" class="btn btn-primary btn-add-cart-builder" id="add-cart-builder-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                Add Bouquet to Cart
+              </button>
+            </div>
+          </aside>
+
+          <!-- Right Column: Step Controls -->
+          <div class="builder-controls-col">
+            <!-- STEP 1: Flower Stems -->
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-number">1</span>
+                <div class="step-title-group">
+                  <h3>Choose Fresh Stems & Quantities</h3>
+                  <p>Hand-harvested daily from sustainable partner nurseries.</p>
+                </div>
+              </div>
+
+              <div class="flower-selector-grid" id="flowers-selector-grid">
+                <!-- Flower cards rendered dynamically in app.js -->
+              </div>
+            </div>
+
+            <!-- STEP 2: Wrapping & Presentation -->
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-number">2</span>
+                <div class="step-title-group">
+                  <h3>Select Wrapping & Presentation</h3>
+                  <p>How would you like your bouquet encased and dressed?</p>
+                </div>
+              </div>
+
+              <div class="wrapping-grid" id="wrapping-options-grid">
+                <!-- Wrapping options rendered dynamically in app.js -->
+              </div>
+            </div>
+
+            <!-- STEP 3: Greeting Card Composer -->
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-number">3</span>
+                <div class="step-title-group">
+                  <h3>Compose Personal Greeting Card</h3>
+                  <p>Printed on heavy cotton stationery with botanical letterpress embossing.</p>
+                </div>
+              </div>
+
+              <div class="card-composer-grid">
+                <!-- Form Inputs -->
+                <div class="card-form-group">
+                  <div>
+                    <label class="field-label" id="occasion-label">Occasion Theme</label>
+                    <div class="occasion-pills" id="occasion-pills-container" role="radiogroup" aria-labelledby="occasion-label">
+                      <button type="button" class="occasion-pill active" data-occasion="birthday">Birthday</button>
+                      <button type="button" class="occasion-pill" data-occasion="anniversary">Anniversary</button>
+                      <button type="button" class="occasion-pill" data-occasion="congratulations">Congratulations</button>
+                      <button type="button" class="occasion-pill" data-occasion="getwell">Get Well Soon</button>
+                      <button type="button" class="occasion-pill" data-occasion="graduation">Graduation</button>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div>
+                      <label class="field-label" for="card-recipient-input">Recipient Name</label>
+                      <input type="text" id="card-recipient-input" class="text-input" placeholder="e.g. Sarah">
+                    </div>
+                    <div>
+                      <label class="field-label" for="card-sender-input">Sign-off / Sender</label>
+                      <input type="text" id="card-sender-input" class="text-input" placeholder="e.g. With Love, Alex">
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="field-label">
+                      <label for="card-message-input">Personal Message</label>
+                      <span class="char-count" id="card-char-counter">0 / 250</span>
+                    </div>
+                    <textarea id="card-message-input" class="text-area" maxlength="250" rows="3" placeholder="Write your heartfelt note here..."></textarea>
+                  </div>
+
+                  <div class="quick-templates-box">
+                    <span class="quick-templates-title">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                      </svg>
+                      Quick Poetic Inspiration (Click to apply)
+                    </span>
+                    <div class="template-buttons" id="quick-quotes-list">
+                      <!-- Rendered by app.js -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Live Physical Card Preview -->
+                <div class="card-preview-container">
+                  <div class="physical-greeting-card">
+                    <svg class="card-stamp-botanical" viewBox="0 0 40 40" fill="currentColor" aria-hidden="true">
+                      <!-- Floral bloom watermark silhouette -->
+                      <path d="M20,4 C25,8 26,16 20,22 C14,16 15,8 20,4 Z M12,18 C10,10 15,5 20,10 C20,16 16,19 12,18 Z M28,18 C30,10 25,5 20,10 C20,16 24,19 28,18 Z M19,27 C13,26 10,30 15,33 C18,34 19,30 19,27 Z M19,30 C25,29 28,32 24,35 C22,36 20,33 19,30 Z"/>
+                      <circle cx="20" cy="13.5" r="2"/>
+                    </svg>
+                    <div class="card-occasion-header" id="card-preview-occasion">Happy Birthday</div>
+                    <div class="card-recipient-display" id="card-preview-recipient">To Sarah,</div>
+                    <div class="card-message-display" id="card-preview-message">
+                      "Wishing you another radiant year blooming with laughter, wonder, and endless golden moments!"
+                    </div>
+                    <div class="card-sender-display" id="card-preview-sender">With Love, Alex</div>
+                  </div>
+                  <span class="card-preview-caption">Included free with every customized bouquet</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Seamless Atelier Service</span>
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle">
+            From the initial stem selection to doorstep delivery, every arrangement is treated as a one-of-a-kind art piece.
+          </p>
+        </div>
+
+        <div class="steps-timeline">
+          <div class="timeline-card">
+            <div class="timeline-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 8v8"></path>
+                <path d="M8 12h8"></path>
+              </svg>
+            </div>
+            <div class="timeline-step-badge">Step 1</div>
+            <h3 class="timeline-title">Curate Your Stems</h3>
+            <p class="timeline-desc">
+              Choose your favorite fresh flowers, adjust stem counts, and choose an artisanal wrapping to match the mood.
+            </p>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div class="timeline-step-badge">Step 2</div>
+            <h3 class="timeline-title">Add Words & Schedule</h3>
+            <p class="timeline-desc">
+              Compose a meaningful message card and pick the ideal doorstep delivery date and morning, afternoon, or twilight window.
+            </p>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <div class="timeline-step-badge">Step 3</div>
+            <h3 class="timeline-title">Hand-Delivered With Care</h3>
+            <p class="timeline-desc">
+              Our florists condition the stems in hydration packs and dispatch directly to your recipient with white-glove courier care.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Delivery Scheduling & Recipient Details Section -->
+    <section class="delivery-section" id="delivery-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Logistics & Care</span>
+          <h2 class="section-title">Delivery Details & Scheduling</h2>
+          <p class="section-subtitle">
+            Coordinate your delivery schedule and specify instructions for our courier team.
+          </p>
+        </div>
+
+        <form class="delivery-grid" id="delivery-form" onsubmit="return false;">
+          <!-- Left: Scheduling & Method -->
+          <div class="delivery-card">
+            <h3 style="font-family:var(--font-display); font-size:1.35rem; color:var(--color-burgundy); margin-bottom:18px;">
+              1. Delivery Method & Timing
+            </h3>
+
+            <!-- Method Selector -->
+            <label class="field-label" style="margin-bottom:8px;">Fulfillment Option</label>
+            <div class="delivery-method-selector">
+              <div class="method-pill active delivery-method-pill" data-method="delivery" role="button" tabindex="0">
+                <span class="method-title">
+                  🚚 Doorstep Courier
+                </span>
+                <span class="method-fee">$8.99 (Free on $65+)</span>
+              </div>
+              <div class="method-pill delivery-method-pill" data-method="pickup" role="button" tabindex="0">
+                <span class="method-title">
+                  🏬 Atelier Pickup
+                </span>
+                <span class="method-fee">Always Free</span>
+              </div>
+            </div>
+
+            <!-- Date Picker -->
+            <div class="form-group">
+              <label for="delivery-date-input">Desired Delivery Date</label>
+              <input type="date" id="delivery-date-input" class="text-input" required>
+            </div>
+
+            <!-- Time Slot Selection -->
+            <div class="form-group">
+              <label id="time-slot-label">Delivery Time Window</label>
+              <div class="slots-grid" role="radiogroup" aria-labelledby="time-slot-label">
+                <div class="slot-pill time-slot-pill" data-slot="morning" role="button" tabindex="0">
+                  <div class="slot-name">Morning</div>
+                  <div class="slot-time">9:00 AM – 12:00 PM</div>
+                </div>
+                <div class="slot-pill time-slot-pill active" data-slot="afternoon" role="button" tabindex="0">
+                  <div class="slot-name">Afternoon</div>
+                  <div class="slot-time">12:00 PM – 4:00 PM</div>
+                </div>
+                <div class="slot-pill time-slot-pill" data-slot="twilight" role="button" tabindex="0">
+                  <div class="slot-name">Twilight</div>
+                  <div class="slot-time">4:00 PM – 7:00 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Recipient & Address Information -->
+          <div class="delivery-card">
+            <h3 style="font-family:var(--font-display); font-size:1.35rem; color:var(--color-burgundy); margin-bottom:18px;">
+              2. Recipient Information
+            </h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="recipient-name-input">Recipient Full Name *</label>
+                <input type="text" id="recipient-name-input" class="text-input" placeholder="e.g. Sarah Jenkins" required>
+              </div>
+              <div class="form-group">
+                <label for="recipient-phone-input">Contact Phone *</label>
+                <input type="tel" id="recipient-phone-input" class="text-input" placeholder="(555) 000-0000" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-address-input">Street Address / Unit *</label>
+              <input type="text" id="recipient-address-input" class="text-input" placeholder="e.g. 742 Evergreen Terrace, Apt 4B" required>
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-instructions-input">Special Delivery Instructions (Optional)</label>
+              <input type="text" id="recipient-instructions-input" class="text-input" placeholder="e.g. Leave on porch, gate code #1234, ring bell">
+            </div>
+
+            <button type="button" class="btn btn-secondary" id="save-delivery-btn" style="width:100%; margin-top:8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Save Delivery Details
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Slide-Over Shopping Cart Drawer -->
+  <div class="cart-drawer-backdrop" id="cart-drawer-backdrop" aria-hidden="true">
+    <div class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-drawer-header">
+        <h3 class="cart-drawer-title" id="cart-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          Your Floral Cart (<span class="cart-count-badge">0</span>)
+        </h3>
+        <button type="button" class="cart-close-btn" id="cart-close-btn" aria-label="Close Shopping Cart">✕</button>
+      </div>
+
+      <!-- Cart Items Body -->
+      <div class="cart-items-body" id="cart-items-list">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Empty Cart State -->
+      <div class="empty-cart-state" id="cart-empty-state" style="display:none;">
+        <svg class="empty-cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <h4>Your Cart is Empty</h4>
+        <p>No bespoke bouquets added yet. Select your stems above to begin!</p>
+        <a href="#bouquet-builder" class="btn btn-primary" onclick="document.getElementById('cart-close-btn').click();">
+          Start Customizing
+        </a>
+      </div>
+
+      <!-- Cart Footer & Checkout Summary -->
+      <div class="cart-drawer-footer">
+        <!-- Promo Code Input -->
+        <div class="promo-input-row">
+          <input type="text" id="promo-input" class="text-input" placeholder="Promo code (e.g. BLOOM10)" style="text-transform:uppercase;">
+          <button type="button" class="btn-promo-apply" id="promo-apply-btn">Apply</button>
+        </div>
+
+        <div class="cart-summary-line">
+          <span>Stems & Wrapping Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+
+        <div class="cart-summary-line discount" id="cart-discount-row" style="display:none;">
+          <span>Promotional Savings</span>
+          <span id="cart-discount-val">-$0.00</span>
+        </div>
+
+        <div class="cart-summary-line">
+          <span>Delivery Service</span>
+          <span id="cart-delivery-fee">FREE</span>
+        </div>
+
+        <div class="cart-summary-total">
+          <span>Total</span>
+          <span id="cart-grand-total">$0.00</span>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-checkout-proceed" id="checkout-drawer-btn">
+          Review & Complete Order
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Review Modal -->
+  <div class="modal-backdrop" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-modal-title">
+    <div class="modal-window">
+      <button type="button" class="modal-close-btn" id="checkout-close-btn" aria-label="Close Checkout Modal">✕</button>
+      <h3 class="modal-title" id="checkout-modal-title">Order Review & Confirmation</h3>
+      <p class="modal-subtitle">Verify your customized bouquet details, greeting card, and delivery timeline before placing your order.</p>
+
+      <div id="checkout-summary-details">
+        <!-- Dynamically rendered in app.js -->
+      </div>
+
+      <div style="margin-top:24px; display:flex; gap:12px; justify-content:flex-end;">
+        <button type="button" class="btn btn-secondary" onclick="document.getElementById('checkout-close-btn').click();">Back to Cart</button>
+        <button type="button" class="btn btn-primary" id="place-order-btn">
+          Place Simulated Order 🌸
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal with Receipt & Confetti -->
+  <div class="modal-backdrop" id="confirmation-modal" role="dialog" aria-modal="true" aria-labelledby="confirmation-modal-title">
+    <div class="modal-window">
+      <button type="button" class="modal-close-btn" id="confirmation-close-btn" aria-label="Close Confirmation Modal">✕</button>
+      <div class="confirmation-content">
+        <div class="confirmation-badge-check">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h3 class="modal-title" id="confirmation-modal-title">Your Order Has Been Placed!</h3>
+        <p class="modal-subtitle">Thank you for ordering with Velvet & Bloom. Our master floral artists are currently conditioning your fresh stems.</p>
+
+        <span class="confirmation-order-num" id="confirmation-order-num">Order Reference: #VB-84291</span>
+
+        <div class="receipt-box" id="confirmation-receipt-details">
+          <!-- Dynamically populated in app.js -->
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-primary" id="confirmation-new-bouquet-btn">
+            Build Another Bouquet
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="window.print();">
+            Print Order Receipt
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo" style="margin-bottom:14px;">
+            <svg class="brand-logo-icon" viewBox="0 0 40 40" fill="none" style="width:32px;height:32px;" aria-hidden="true">
+              <!-- Delicate curved stem in sage green -->
+              <path d="M20,22 Q20,31 18,36" stroke="#8FA382" stroke-width="2" stroke-linecap="round"/>
+              <!-- Sage leaves -->
+              <path d="M19,27 C13,26 10,30 15,33 C18,34 19,30 19,27 Z" fill="#8FA382"/>
+              <path d="M19,30 C25,29 28,32 24,35 C22,36 20,33 19,30 Z" fill="#8FA382" opacity="0.9"/>
+              <!-- Outer cream blush lateral petals -->
+              <path d="M12,18 C10,10 15,5 20,10 C20,16 16,19 12,18 Z" fill="#F7E5E1" opacity="0.9"/>
+              <path d="M28,18 C30,10 25,5 20,10 C20,16 24,19 28,18 Z" fill="#F7E5E1" opacity="0.9"/>
+              <!-- Central rose petal -->
+              <path d="M20,4 C25,8 26,16 20,22 C14,16 15,8 20,4 Z" fill="#E5A89B"/>
+              <!-- Inner heart -->
+              <path d="M20,8 C23,12 23,17 20,19 C17,17 17,12 20,8 Z" fill="#FFFFFF"/>
+              <!-- Warm golden center stamen bead -->
+              <circle cx="20" cy="13.5" r="2" fill="#C2934D"/>
+            </svg>
+            <span class="brand-title" style="color:#fff; font-size:1.3rem;">Velvet & Bloom</span>
+          </div>
+          <p>
+            An artisan floral atelier dedicated to celebrating human connections through the living poetry of blooms, seasonal stems, and handcrafted presentation.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-icon-btn" aria-label="Instagram">📸</a>
+            <a href="#" class="social-icon-btn" aria-label="Pinterest">📌</a>
+            <a href="#" class="social-icon-btn" aria-label="Facebook">📘</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Atelier Hours</h4>
+          <ul>
+            <li>Monday – Friday: 8:00 AM – 7:00 PM</li>
+            <li>Saturday: 9:00 AM – 6:00 PM</li>
+            <li>Sunday: 10:00 AM – 4:00 PM</li>
+            <li>Same-day delivery cutoff: 2:00 PM</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Visit & Contact</h4>
+          <ul>
+            <li>📍 428 Blossom Lane, Garden Quarter</li>
+            <li>📞 (555) 728-3690</li>
+            <li>✉️ concierge@velvetandbloom.com</li>
+            <li>🚚 Local Doorstep Delivery Area: 25-mile radius</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Floral Journal</h4>
+          <p>Join our private botanical circle for seasonal flower forecasts, vase care secrets, and VIP bloom previews.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to the Velvet & Bloom Journal!');">
+            <input type="email" class="newsletter-input" placeholder="Your email address" required aria-label="Email address for floral newsletter">
+            <button type="submit" class="btn btn-primary" style="padding:10px 16px; font-size:0.85rem;">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Velvet & Bloom Florist Atelier. All rights reserved. Made with love for flower enthusiasts.</div>
+        <div style="display:flex; gap:16px;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Flower Care Guide</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
