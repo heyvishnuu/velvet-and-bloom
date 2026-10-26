@@ -18,6 +18,7 @@ Built purely with modern **HTML5**, **CSS3**, and **vanilla JavaScript (ES6+)**.
 - **Slide-Over Shopping Cart Drawer:** Manage multiple customized bouquets with item steppers and promo code engine.
 - **Order Review & Celebration:** Simulated checkout flow producing a printable receipt (#VB-XXXXX) and animated celebration confetti burst.
 - **Ambient Petal Animation:** HTML5 Canvas particle falling petals respecting `prefers-reduced-motion`.
+- **Midnight Noir Dark Mode:** Accessible header theme toggle with Sun/Moon icons, automatic device system preference detection (`prefers-color-scheme`), zero flash of unstyled content (FOUC), and `localStorage` persistence.
 
 ---
 

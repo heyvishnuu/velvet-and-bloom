@@ -201,6 +201,7 @@
 
   const el = {
     // Header & Navigation
+    themeToggleBtn: document.getElementById('theme-toggle-btn'),
     cartBtn: document.getElementById('cart-toggle-btn'),
     cartCountBadges: document.querySelectorAll('.cart-count-badge'),
     cartDrawerBackdrop: document.getElementById('cart-drawer-backdrop'),
@@ -1778,9 +1779,78 @@
     }, 3500);
   }
 
-  // --- 15. INITIALIZATION ON DOM READY ---
+  // --- 15. THEME TOGGLE & PERSISTENCE SYSTEM ---
+
+  const THEME_STORAGE_KEY = 'velvet_bloom_theme';
+
+  function getSystemThemePreference() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function getCurrentTheme() {
+    try {
+      const saved = localStorage.getItem(THEME_STORAGE_KEY);
+      if (saved === 'dark' || saved === 'light') {
+        return saved;
+      }
+    } catch (e) {}
+    return getSystemThemePreference();
+  }
+
+  function applyTheme(theme, isUserAction = false) {
+    const root = document.documentElement;
+    const isDark = theme === 'dark';
+
+    root.setAttribute('data-theme', theme);
+
+    if (el.themeToggleBtn) {
+      el.themeToggleBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      const actionText = isDark ? 'Switch to light theme' : 'Switch to dark theme';
+      el.themeToggleBtn.setAttribute('aria-label', actionText);
+      el.themeToggleBtn.setAttribute('title', actionText);
+    }
+
+    if (isUserAction) {
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
+      } catch (err) {
+        console.warn('Unable to persist theme to localStorage', err);
+      }
+      showToast(isDark ? 'Switched to Midnight Noir mode 🌙' : 'Switched to Sunlight Atelier mode ☀️');
+    }
+  }
+
+  function initTheme() {
+    const initialTheme = getCurrentTheme();
+    applyTheme(initialTheme, false);
+
+    if (el.themeToggleBtn) {
+      el.themeToggleBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const nextTheme = current === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme, true);
+      });
+    }
+
+    // Listen for device system preference changes if user hasn't explicitly set a preference
+    if (window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      mediaQuery.addEventListener('change', (e) => {
+        try {
+          const saved = localStorage.getItem(THEME_STORAGE_KEY);
+          // Only react to system preference if user hasn't manually overridden it
+          if (!saved) {
+            applyTheme(e.matches ? 'dark' : 'light', false);
+          }
+        } catch (err) {}
+      });
+    }
+  }
+
+  // --- 16. INITIALIZATION ON DOM READY ---
 
   document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     initPetalsCanvas();
     renderFlowersSelector();
     renderWrappingOptions();
