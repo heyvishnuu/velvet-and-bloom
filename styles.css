@@ -211,7 +211,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 /* Announcement Bar */
 .announcement-bar {
   background: linear-gradient(90deg, var(--color-burgundy-dark), var(--color-burgundy), var(--color-burgundy-dark));
-  color: var(--color-cream);
+  color: #FFF5F2;
   font-size: 0.84rem;
   font-weight: 500;
   letter-spacing: 0.03em;
@@ -476,11 +476,18 @@ html:not([data-theme="dark"]) .moon-icon {
   color: var(--color-sage);
 }
 [data-theme="dark"] .announcement-bar {
-  background: linear-gradient(90deg, #18060B, #380C16, #18060B);
-  border-bottom: 1px solid rgba(229, 125, 142, 0.2);
+  background: linear-gradient(90deg, #1A050B, #380C16, #1A050B);
+  color: #FAF2EF;
+  border-bottom: 1px solid rgba(229, 125, 142, 0.25);
 }
 [data-theme="dark"] .announcement-badge {
+  background: var(--color-gold);
   color: #24080D;
+}
+[data-theme="dark"] .announcement-code {
+  background: rgba(224, 179, 110, 0.2);
+  color: #FFF2D6;
+  border: 1px solid rgba(224, 179, 110, 0.45);
 }
 [data-theme="dark"] .showcase-visual {
   background: radial-gradient(circle at 50% 50%, #2A2027 0%, #151014 100%);
