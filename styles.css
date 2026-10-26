@@ -1428,7 +1428,11 @@ html:not([data-theme="dark"]) .moon-icon {
 }
 
 .text-input, .text-area, .select-input {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
   padding: 12px 14px;
   background: var(--color-cream-card);
   border: 1px solid var(--color-border);
@@ -1437,6 +1441,21 @@ html:not([data-theme="dark"]) .moon-icon {
   font-size: 0.92rem;
   color: var(--color-charcoal);
   transition: border-color var(--transition-fast);
+  -webkit-appearance: none;
+  appearance: none;
+}
+input[type="date"].text-input {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 46px;
+  text-align: left;
+}
+input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
 }
 .text-input:focus, .text-area:focus, .select-input:focus {
   border-color: var(--color-burgundy);
@@ -1658,6 +1677,10 @@ html:not([data-theme="dark"]) .moon-icon {
   border: 1px solid var(--color-border);
   padding: 32px;
   box-shadow: var(--shadow-sm);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 .delivery-method-selector {
   display: grid;
@@ -1733,6 +1756,13 @@ html:not([data-theme="dark"]) .moon-icon {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.form-row > .form-group {
+  min-width: 0;
+  width: 100%;
 }
 @media (max-width: 600px) {
   .form-row {
@@ -1741,6 +1771,9 @@ html:not([data-theme="dark"]) .moon-icon {
 }
 .form-group {
   margin-bottom: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .form-group label {
   display: block;
@@ -2670,7 +2703,9 @@ html:not([data-theme="dark"]) .moon-icon {
     padding: 20px 16px;
     border-radius: var(--radius-md);
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
+    overflow: hidden;
   }
   .delivery-method-selector {
     grid-template-columns: 1fr 1fr;
