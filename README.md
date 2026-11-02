@@ -9,8 +9,8 @@ Built purely with modern **HTML5**, **CSS3**, and **vanilla JavaScript (ES6+)**.
 ## Features
 
 - **Live Dynamic Bouquet Visualizer:** Layered SVG rendering that organically positions stems, eucalyptus greenery, flower blooms, and container wrapping in real time.
-- **5 Fresh Stem Varieties:** Red Velvet Roses ($4.50), Imperial White Lilies ($5.00), Blush Pink Carnations ($3.25), Exotic Royal Orchids ($6.00), and Golden Meadow Sunflowers ($3.75).
-- **4 Signature Wrapping Styles:** Rustic Kraft Paper (+$4.00), Luxury Matte Black Wrap (+$7.00), Crystal Glass Vase (+$12.00), and Woven Wicker Basket (+$10.00).
+- **5 Fresh Stem Varieties:** Red Velvet Roses (₹45.00), Imperial White Lilies (₹85.00), Blush Pink Carnations (₹35.00), Exotic Royal Orchids (₹95.00), and Golden Meadow Sunflowers (₹60.00).
+- **4 Signature Wrapping Styles:** Rustic Kraft Paper (+₹100.00), Luxury Matte Black Wrap (+₹150.00), Crystal Glass Vase (+₹350.00), and Woven Wicker Basket (+₹250.00).
 - **Stationery Greeting Card Composer:** Live letterpress card preview with recipient, sign-off, character counter, and quick one-click poetic message templates.
 - **5 Occasion Presets:** Instant 1-click presets for *Birthday*, *Anniversary*, *Congratulations*, *Get Well Soon*, and *Graduation*.
 - **Dynamic Price Calculator:** Instant tally of stems, wrapping, delivery, and coupon discounts (`BLOOM10` for 10% off, `FREESHIP` for free delivery).

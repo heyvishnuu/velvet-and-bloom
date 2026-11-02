@@ -8,11 +8,27 @@
 
   // --- 1. DATA CONFIGURATIONS ---
 
+  const inrFormatter = new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+
+  function formatCurrency(amount) {
+    return inrFormatter.format(amount || 0);
+  }
+
+  const DELIVERY_CONFIG = {
+    courierFee: 149.00,
+    freeDeliveryThreshold: 999.00
+  };
+
   const FLOWERS = {
     roses: {
       id: 'roses',
       name: 'Red Velvet Roses',
-      price: 4.50,
+      price: 45.00,
       meaning: 'Deep love, admiration & passionate grace',
       primaryColor: '#A81C2E',
       secondaryColor: '#D3384D',
@@ -22,7 +38,7 @@
     lilies: {
       id: 'lilies',
       name: 'Imperial White Lilies',
-      price: 5.00,
+      price: 85.00,
       meaning: 'Purity, rebirth & refined devotion',
       primaryColor: '#FCFBF8',
       secondaryColor: '#E6E1D5',
@@ -32,7 +48,7 @@
     carnations: {
       id: 'carnations',
       name: 'Blush Pink Carnations',
-      price: 3.25,
+      price: 35.00,
       meaning: 'Enduring affection & sweet gratitude',
       primaryColor: '#F2A4B0',
       secondaryColor: '#E57D8E',
@@ -42,7 +58,7 @@
     orchids: {
       id: 'orchids',
       name: 'Exotic Royal Orchids',
-      price: 6.00,
+      price: 95.00,
       meaning: 'Rare luxury, strength & ethereal beauty',
       primaryColor: '#8E388A',
       secondaryColor: '#C068BC',
@@ -52,7 +68,7 @@
     sunflowers: {
       id: 'sunflowers',
       name: 'Golden Meadow Sunflowers',
-      price: 3.75,
+      price: 60.00,
       meaning: 'Radiant optimism, warmth & celebration',
       primaryColor: '#F5B01D',
       secondaryColor: '#D9910D',
@@ -66,28 +82,28 @@
     kraft: {
       id: 'kraft',
       name: 'Rustic Kraft Paper',
-      price: 4.00,
+      price: 100.00,
       desc: 'Eco-friendly textured organic kraft paper bound with natural braided jute twine.',
       color: '#D4B38C'
     },
     black: {
       id: 'black',
       name: 'Luxury Matte Black Wrap',
-      price: 7.00,
+      price: 150.00,
       desc: 'Heavyweight matte noir presentation wrap adorned with champagne gold silk ribbon.',
       color: '#242022'
     },
     vase: {
       id: 'vase',
       name: 'Crystal Glass Vase',
-      price: 12.00,
+      price: 350.00,
       desc: 'Heavy-base artisanal florist glass cylinder, pre-filled with floral food water.',
       color: '#A8D2D9'
     },
     basket: {
       id: 'basket',
       name: 'Woven Wicker Basket',
-      price: 10.00,
+      price: 250.00,
       desc: 'Handwoven natural willow basket lined with lush moisture-retaining moss.',
       color: '#BC9065'
     }
@@ -850,7 +866,7 @@
     // Update Price with subtle pulse
     const price = calculateBuilderPrice();
     if (el.builderPriceDisplay) {
-      el.builderPriceDisplay.textContent = `$${price.toFixed(2)}`;
+      el.builderPriceDisplay.textContent = formatCurrency(price);
       el.builderPriceDisplay.classList.remove('pulse');
       void el.builderPriceDisplay.offsetWidth; // trigger reflow
       el.builderPriceDisplay.classList.add('pulse');
@@ -872,7 +888,7 @@
     Object.keys(FLOWERS).forEach(key => {
       const flower = FLOWERS[key];
       const count = state.builder.stems[key] || 0;
-      const subtotal = (count * flower.price).toFixed(2);
+      const subtotal = count * flower.price;
 
       html += `
         <div class="flower-card ${count > 0 ? 'has-stems' : ''}" id="flower-card-${key}">
@@ -886,11 +902,11 @@
             <div class="flower-info">
               <h4 class="flower-name">${flower.name}</h4>
               <span class="flower-meaning">${flower.meaning}</span>
-              <div class="flower-price">$${flower.price.toFixed(2)} <span style="font-size:0.75rem; font-weight:400; color:var(--color-charcoal-muted)">/ stem</span></div>
+              <div class="flower-price">${formatCurrency(flower.price)} <span style="font-size:0.75rem; font-weight:400; color:var(--color-charcoal-muted)">/ stem</span></div>
             </div>
           </div>
           <div class="flower-counter-row">
-            <span class="stem-subtotal">Subtotal: <strong>$${subtotal}</strong></span>
+            <span class="stem-subtotal">Subtotal: <strong>${formatCurrency(subtotal)}</strong></span>
             <div class="stepper-control" role="group" aria-label="Quantity for ${flower.name}">
               <button type="button" class="stepper-btn" data-action="dec" data-flower="${key}" aria-label="Decrease ${flower.name}" ${count === 0 ? 'disabled' : ''}>−</button>
               <span class="stepper-val" id="val-${key}">${count}</span>
@@ -930,7 +946,7 @@
     const subtotalElem = card?.querySelector('.stem-subtotal strong');
 
     if (valElem) valElem.textContent = count;
-    if (subtotalElem) subtotalElem.textContent = `$${(count * FLOWERS[key].price).toFixed(2)}`;
+    if (subtotalElem) subtotalElem.textContent = formatCurrency(count * FLOWERS[key].price);
 
     if (card) {
       if (count > 0) {
@@ -961,7 +977,7 @@
             <h4>${wrap.name}</h4>
             <p>${wrap.desc}</p>
           </div>
-          <div class="wrap-price">+ $${wrap.price.toFixed(2)}</div>
+          <div class="wrap-price">+ ${formatCurrency(wrap.price)}</div>
         </div>
       `;
     });
@@ -1503,7 +1519,7 @@
         .join(', ');
 
       const wrapName = WRAPPINGS[item.wrapping]?.name || 'Standard Wrap';
-      const itemTotal = (item.unitPrice * item.quantity).toFixed(2);
+      const itemTotal = item.unitPrice * item.quantity;
 
       html += `
         <div class="cart-item-card" data-index="${index}">
@@ -1524,7 +1540,7 @@
               : ''
           }
           <div class="cart-item-footer">
-            <span class="cart-item-price">$${itemTotal}</span>
+            <span class="cart-item-price">${formatCurrency(itemTotal)}</span>
             <div class="stepper-control" role="group" aria-label="Item quantity">
               <button type="button" class="stepper-btn" data-cart-qty="dec" data-id="${item.id}">−</button>
               <span class="stepper-val">${item.quantity}</span>
@@ -1581,13 +1597,13 @@
       discount = subtotal * 0.10;
     }
 
-    // Delivery fee ($8.99 for delivery, or free over $65 or pickup or FREESHIP)
+    // Delivery fee (₹149.00 for delivery, or free over ₹999 or pickup or FREESHIP)
     let deliveryFee = 0;
     if (state.delivery.method === 'delivery') {
-      if (subtotal >= 65 || state.discountCode === 'FREESHIP') {
+      if (subtotal >= DELIVERY_CONFIG.freeDeliveryThreshold || state.discountCode === 'FREESHIP') {
         deliveryFee = 0;
       } else {
-        deliveryFee = subtotal > 0 ? 8.99 : 0;
+        deliveryFee = subtotal > 0 ? DELIVERY_CONFIG.courierFee : 0;
       }
     } else {
       deliveryFee = 0;
@@ -1595,12 +1611,12 @@
 
     const grandTotal = Math.max(0, subtotal - discount + deliveryFee);
 
-    if (el.cartSubtotal) el.cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+    if (el.cartSubtotal) el.cartSubtotal.textContent = formatCurrency(subtotal);
 
     if (el.cartDiscountRow && el.cartDiscountVal) {
       if (discount > 0) {
         el.cartDiscountRow.style.display = 'flex';
-        el.cartDiscountVal.textContent = `-$${discount.toFixed(2)} (${state.discountCode})`;
+        el.cartDiscountVal.textContent = `-${formatCurrency(discount)} (${state.discountCode})`;
       } else {
         el.cartDiscountRow.style.display = 'none';
       }
@@ -1610,12 +1626,12 @@
       if (deliveryFee === 0) {
         el.cartDeliveryFee.innerHTML = '<span style="color:#2e7d32; font-weight:700">FREE</span>';
       } else {
-        el.cartDeliveryFee.textContent = `$${deliveryFee.toFixed(2)}`;
+        el.cartDeliveryFee.textContent = formatCurrency(deliveryFee);
       }
     }
 
     if (el.cartGrandTotal) {
-      el.cartGrandTotal.textContent = `$${grandTotal.toFixed(2)}`;
+      el.cartGrandTotal.textContent = formatCurrency(grandTotal);
     }
 
     return { subtotal, discount, deliveryFee, grandTotal };
@@ -1638,7 +1654,7 @@
         <div style="padding: 10px 0; border-bottom: 1px dashed var(--color-border);">
           <div style="display:flex; justify-content:space-between; font-weight:600; color:var(--color-burgundy);">
             <span>${item.quantity}× ${item.title}</span>
-            <span>$${(item.unitPrice * item.quantity).toFixed(2)}</span>
+            <span>${formatCurrency(item.unitPrice * item.quantity)}</span>
           </div>
           <div style="font-size:0.8rem; color:var(--color-charcoal-muted); margin-top:2px;">
             ${stemsBreakdown} • ${WRAPPINGS[item.wrapping]?.name}
@@ -1652,7 +1668,7 @@
 
     const deliveryMethodLabel =
       state.delivery.method === 'delivery'
-        ? `Doorstep Courier Delivery ($${totals.deliveryFee === 0 ? 'FREE' : totals.deliveryFee.toFixed(2)})`
+        ? `Doorstep Courier Delivery (${totals.deliveryFee === 0 ? 'FREE' : formatCurrency(totals.deliveryFee)})`
         : 'Florist Atelier Pickup (FREE)';
 
     const slotLabel =
@@ -1682,23 +1698,23 @@
       <div style="display:flex; flex-direction:column; gap:6px; font-size:0.9rem;">
         <div style="display:flex; justify-content:space-between;">
           <span>Subtotal:</span>
-          <strong>$${totals.subtotal.toFixed(2)}</strong>
+          <strong>${formatCurrency(totals.subtotal)}</strong>
         </div>
         ${
           totals.discount > 0
             ? `<div style="display:flex; justify-content:space-between; color:#2e7d32;">
                 <span>Discount (${state.discountCode}):</span>
-                <strong>-$${totals.discount.toFixed(2)}</strong>
+                <strong>-${formatCurrency(totals.discount)}</strong>
               </div>`
             : ''
         }
         <div style="display:flex; justify-content:space-between;">
           <span>Delivery Fee:</span>
-          <strong>${totals.deliveryFee === 0 ? 'FREE' : '$' + totals.deliveryFee.toFixed(2)}</strong>
+          <strong>${totals.deliveryFee === 0 ? 'FREE' : formatCurrency(totals.deliveryFee)}</strong>
         </div>
         <div style="display:flex; justify-content:space-between; font-family:var(--font-display); font-size:1.35rem; font-weight:700; color:var(--color-burgundy); margin-top:8px; padding-top:8px; border-top:1px solid var(--color-border);">
           <span>Total Payable:</span>
-          <span>$${totals.grandTotal.toFixed(2)}</span>
+          <span>${formatCurrency(totals.grandTotal)}</span>
         </div>
       </div>
     `;
@@ -1720,7 +1736,7 @@
         receiptItems += `
           <div class="receipt-row">
             <span>${item.quantity}× ${item.title}</span>
-            <span>$${(item.unitPrice * item.quantity).toFixed(2)}</span>
+            <span>${formatCurrency(item.unitPrice * item.quantity)}</span>
           </div>
         `;
       });
@@ -1743,7 +1759,7 @@
         </div>
         <div class="receipt-row" style="margin-top:10px; padding-top:8px; border-top:1px solid #E8DFD5; font-size:1.05rem;">
           <strong>Total Paid (Simulated):</strong>
-          <strong>$${totals.grandTotal.toFixed(2)}</strong>
+          <strong>${formatCurrency(totals.grandTotal)}</strong>
         </div>
       `;
     }
